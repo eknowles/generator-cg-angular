@@ -36,7 +36,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('css', ['clean'], function () {
-  return gulp.src('app.less')
+  return gulp.src('app/app.less')
     .pipe(less())
     .pipe(cssmin({keepSpecialComments: 0}))
     .pipe(rename('app.full.min.css'))
@@ -51,7 +51,7 @@ gulp.task('js', ['clean'], function () {
       moduleName: packagejson.name
     }));
 
-  var jsStream = domSrc({file: 'index.html', selector: 'script[data-build!="exclude"]', attribute: 'src'});
+  var jsStream = domSrc({file: 'app/index.html', selector: 'script[data-build!="exclude"]', attribute: 'src'});
 
   var combined = streamqueue({objectMode: true});
 
@@ -81,7 +81,7 @@ gulp.task('js', ['clean'], function () {
 });
 
 gulp.task('indexHtml', ['clean'], function () {
-  return gulp.src('index.html')
+  return gulp.src('app/index.html')
     .pipe(gCheerio(function ($) {
       $('script[data-remove!="exclude"]').remove();
       $('link').remove();

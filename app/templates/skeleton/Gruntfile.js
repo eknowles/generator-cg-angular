@@ -74,7 +74,7 @@ module.exports = function (grunt) {
       production: {
         options: {},
         files: {
-          'temp/app.css': 'app.less'
+          'temp/app.css': 'app/app.less'
         }
       }
     },
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
             {selector: 'link[rel="stylesheet"][data-concat!="false"]', attribute: 'href', writeto: 'appcss'}
           ]
         },
-        src: 'index.html'
+        src: 'app/index.html'
       },
       update: {
         options: {
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
             {selector: 'head', html: '<link rel="stylesheet" href="app.full.min.css">'}
           ]
         },
-        src: 'index.html',
+        src: 'app/index.html',
         dest: 'dist/index.html'
       }
     },
