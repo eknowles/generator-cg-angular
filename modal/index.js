@@ -10,49 +10,49 @@ var path = require('path');
 
 var ModalGenerator = module.exports = function ModalGenerator(args, options, config) {
 
-    cgUtils.getNameArg(this,args);
+  cgUtils.getNameArg(this, args);
 
-    yeoman.generators.Base.apply(this, arguments);
+  yeoman.generators.Base.apply(this, arguments);
 
 };
 
 util.inherits(ModalGenerator, yeoman.generators.Base);
 
 ModalGenerator.prototype.askFor = function askFor() {
-    var cb = this.async();
+  var cb = this.async();
 
-    var prompts = [];
+  var prompts = [];
 
-    cgUtils.addNamePrompt(this,prompts,'modal');
+  cgUtils.addNamePrompt(this, prompts, 'modal');
 
-    this.prompt(prompts, function (props) {
-        if (props.name){
-            this.name = props.name;
-        }
-        cgUtils.askForModuleAndDir('modal',this,true,cb);
-    }.bind(this)); 
+  this.prompt(prompts, function (props) {
+    if (props.name) {
+      this.name = props.name;
+    }
+    cgUtils.askForModuleAndDir('modal', this, true, cb);
+  }.bind(this));
 
 };
 
 ModalGenerator.prototype.files = function files() {
 
-    this.ctrlname = _.camelize(_.classify(this.name)) + 'Ctrl';
+  this.ctrlname = _.camelize(_.classify(this.name)) + 'Ctrl';
 
-    cgUtils.processTemplates(this.name,this.dir,'modal',this,null,null,this.module);
+  cgUtils.processTemplates(this.name, this.dir, 'modal', this, null, null, this.module);
 
-    setTimeout((function(){
+  setTimeout((function () {
 
-        console.log('');
-        console.log('  Open this modal by using ' + chalk.bold('angular-ui-bootstrap') + ' module\'s ' + chalk.bold('$modal') + ' service:');
-        console.log('');
-        console.log('  $modal.open({');
-        console.log('      templateUrl: \'' + path.join(this.dir,this.name + '.html') + '\',');
-        console.log('      controller: \''+ this.ctrlname +'\'');
-        console.log('  }).result.then(function(result){');
-        console.log('      //do something with the result');
-        console.log('  });');
-        console.log('');
+    console.log('');
+    console.log('  Open this modal by using ' + chalk.bold('angular-ui-bootstrap') + ' module\'s ' + chalk.bold('$modal') + ' service:');
+    console.log('');
+    console.log('  $modal.open({');
+    console.log('      templateUrl: \'' + path.join(this.dir, this.name + '.html') + '\',');
+    console.log('      controller: \'' + this.ctrlname + '\'');
+    console.log('  }).result.then(function(result){');
+    console.log('      //do something with the result');
+    console.log('  });');
+    console.log('');
 
-    }).bind(this),200);
+  }).bind(this), 200);
 
 };

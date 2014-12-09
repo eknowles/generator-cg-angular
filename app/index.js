@@ -8,11 +8,11 @@ var CgangularGenerator = module.exports = function CgangularGenerator(args, opti
     yeoman.generators.Base.apply(this, arguments);
 
     this.on('end', function () {
-        this.config.set('partialDirectory','partial/');
-        this.config.set('modalDirectory','partial/');
-        this.config.set('directiveDirectory','directive/');
-        this.config.set('filterDirectory','filter/');
-        this.config.set('serviceDirectory','service/');
+        this.config.set('partialDirectory', 'partial/');
+        this.config.set('modalDirectory', 'partial/');
+        this.config.set('directiveDirectory', 'directive/');
+        this.config.set('filterDirectory', 'filter/');
+        this.config.set('serviceDirectory', 'service/');
         var inject = {
             js: {
                 file: 'index.html',
@@ -26,9 +26,9 @@ var CgangularGenerator = module.exports = function CgangularGenerator(args, opti
                 template: '@import "<%= filename %>";'
             }
         };
-        this.config.set('inject',inject);
+        this.config.set('inject', inject);
         this.config.save();
-        this.installDependencies({ skipInstall: options['skip-install'] });
+        this.installDependencies({skipInstall: options['skip-install']});
     });
 
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -56,10 +56,10 @@ CgangularGenerator.prototype.askForUiRouter = function askFor() {
 
     var prompts = [{
         name: 'router',
-        type:'list',
+        type: 'list',
         message: 'Which router would you like to use?',
-        default: 0,
-        choices: ['Standard Angular Router','Angular UI Router']
+        default: 1,
+        choices: ['Standard Angular Router', 'Angular UI Router']
     }];
 
     this.prompt(prompts, function (props) {
@@ -74,11 +74,11 @@ CgangularGenerator.prototype.askForUiRouter = function askFor() {
             this.routerModuleName = 'ngRoute';
             this.routerViewDirective = 'ng-view';
         }
-        this.config.set('uirouter',this.uirouter);
+        this.config.set('uirouter', this.uirouter);
         cb();
     }.bind(this));
 };
 
 CgangularGenerator.prototype.app = function app() {
-    this.directory('skeleton/','./');
+    this.directory('skeleton/', './');
 };
